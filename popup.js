@@ -28,18 +28,29 @@ chrome.windows.getCurrent((currentWindow) => {
         windowItem.classList.add('current');
       }
       
-      const windowNumber = document.createElement('span');
+      const windowInfo = document.createElement('div');
+      windowInfo.className = 'window-info';
+      
+      const windowNumber = document.createElement('div');
       windowNumber.className = 'window-number';
       windowNumber.textContent = `Window ${index + 1}`;
       if (window.id === currentWindowId) {
         windowNumber.textContent += ' (Current)';
       }
       
+      const windowTitle = document.createElement('div');
+      windowTitle.className = 'window-title';
+      // Get the title of the active tab in this window
+      const activeTab = window.tabs.find(tab => tab.active);
+      windowTitle.textContent = activeTab ? activeTab.title : 'No active tab';
+      
       const windowCount = document.createElement('span');
       windowCount.className = 'window-count';
       windowCount.textContent = window.tabs.length;
       
-      windowItem.appendChild(windowNumber);
+      windowInfo.appendChild(windowNumber);
+      windowInfo.appendChild(windowTitle);
+      windowItem.appendChild(windowInfo);
       windowItem.appendChild(windowCount);
       windowsList.appendChild(windowItem);
     });
