@@ -28,6 +28,19 @@ chrome.windows.getCurrent((currentWindow) => {
         windowItem.classList.add('current');
       }
       
+      // Make window item clickable to switch to that window
+      windowItem.style.cursor = 'pointer';
+      windowItem.addEventListener('click', () => {
+        // Get the active tab in the clicked window
+        const activeTab = window.tabs.find(tab => tab.active);
+        if (activeTab) {
+          // Focus the window and activate the tab
+          chrome.windows.update(window.id, { focused: true }, () => {
+            chrome.tabs.update(activeTab.id, { active: true });
+          });
+        }
+      });
+      
       const windowInfo = document.createElement('div');
       windowInfo.className = 'window-info';
       
