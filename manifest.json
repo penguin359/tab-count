@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Tab Counter",
   "version": "1.0.0",
-  "description": "Count the number of open tabs in the current window",
+  "description": "Count the number of open tabs in the current window and the overall browser.",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
